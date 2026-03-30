@@ -160,7 +160,14 @@ const DeployDemo = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative' }}>
               <span style={{ color: T.gold, userSelect: 'none', flexShrink: 0 }}>$</span>
               <span style={{ color: T.muted, flexShrink: 0 }}>agentific deploy --agent</span>
-              <div style={{ position: 'relative', flex: 1 }}>
+              <div style={{
+                position: 'relative', flex: 1,
+                background: !agentName ? 'rgba(217,175,98,0.08)' : 'none',
+                border: !agentName ? `1px solid rgba(217,175,98,0.25)` : '1px solid transparent',
+                borderRadius: 6,
+                padding: '6px 10px',
+                transition: 'all 0.3s',
+              }}>
                 <input
                   ref={inputRef}
                   value={agentName}
@@ -180,11 +187,26 @@ const DeployDemo = () => {
                   }}
                 />
 
+                {/* Animated placeholder typing */}
+                {!agentName && (
+                  <span className="typewriter-placeholder" style={{
+                    position: 'absolute',
+                    left: 10,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: T.gold,
+                    fontSize: 13,
+                    fontFamily: T.font,
+                    pointerEvents: 'none',
+                    opacity: 0.5,
+                  }} />
+                )}
+
                 {/* Floating tooltip bubble */}
                 {!agentName && (
                   <div className="float-bubble" style={{
                     position: 'absolute',
-                    top: -48,
+                    top: -54,
                     left: 0,
                     background: T.gold,
                     color: T.bg,
@@ -198,7 +220,7 @@ const DeployDemo = () => {
                     boxShadow: `0 8px 32px rgba(217,175,98,0.3)`,
                     zIndex: 10,
                   }}>
-                    Type here! e.g. &quot;my-beauty-agent&quot;
+                    Write your agent&apos;s name here!
                     {/* Arrow */}
                     <div style={{
                       position: 'absolute',

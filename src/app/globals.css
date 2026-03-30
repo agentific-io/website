@@ -23,6 +23,27 @@ a { text-decoration: none; }
   animation: floatBubble 2s ease-in-out infinite;
 }
 
+@keyframes typewriter {
+  0%, 18% { content: 'my-beauty-agent'; }
+  20%, 38% { content: 'sales-copilot'; }
+  40%, 58% { content: 'legal-assistant'; }
+  60%, 78% { content: 'support-bot'; }
+  80%, 100% { content: 'my-agent-name'; }
+}
+
+@keyframes caret {
+  0%, 100% { border-color: #D9AF62; }
+  50% { border-color: transparent; }
+}
+
+.typewriter-placeholder::after {
+  content: 'my-beauty-agent';
+  animation: typewriter 10s step-end infinite;
+  border-right: 2px solid #D9AF62;
+  padding-right: 3px;
+  animation: typewriter 10s step-end infinite, caret 0.8s step-end infinite;
+}
+
 .hero-h1 {
   font-size: clamp(48px, 7vw, 92px);
   font-weight: 800;
