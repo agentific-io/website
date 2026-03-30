@@ -184,7 +184,7 @@ const DeployDemo = () => {
                 <div className="float-bubble" style={{
                   position: 'absolute',
                   top: -52,
-                  right: 0,
+                  left: 0,
                   background: T.gold,
                   color: T.bg,
                   padding: '8px 16px',
@@ -202,7 +202,7 @@ const DeployDemo = () => {
                   <div style={{
                     position: 'absolute',
                     bottom: -6,
-                    right: 24,
+                    left: 24,
                     width: 12,
                     height: 12,
                     background: T.gold,
