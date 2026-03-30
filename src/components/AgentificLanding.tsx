@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 // ─── TOKENS ─────────────────────────────────────────────
 const T = {
@@ -320,9 +322,21 @@ const Waitlist = ({ id = 'main', compact = false }: { id?: string; compact?: boo
   const [email, setEmail] = useState('');
   const [done, setDone] = useState(false);
   const [err, setErr] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
     if (!email || !email.includes('@') || !email.includes('.')) { setErr(true); return; }
+    setSaving(true);
+    try {
+      await addDoc(collection(db, 'waitlist'), {
+        email,
+        source: id,
+        createdAt: serverTimestamp(),
+      });
+    } catch (e) {
+      console.error('Error saving to waitlist:', e);
+    }
+    setSaving(false);
     setDone(true);
   };
 
@@ -362,14 +376,15 @@ const Waitlist = ({ id = 'main', compact = false }: { id?: string; compact?: boo
           color: T.text, fontFamily: T.font, fontSize: 14, outline: 'none',
         }}
       />
-      <button onClick={submit} style={{
+      <button onClick={submit} disabled={saving} style={{
         padding: '14px 28px',
         background: T.gold, color: T.bg,
         fontFamily: T.font, fontSize: 12, fontWeight: 700,
         letterSpacing: 1, textTransform: 'uppercase',
         border: `1px solid ${T.gold}`,
         borderRadius: '0 8px 8px 0',
-        cursor: 'pointer', whiteSpace: 'nowrap',
+        cursor: saving ? 'wait' : 'pointer', whiteSpace: 'nowrap',
+        opacity: saving ? 0.7 : 1,
       }}>
         Get Access
       </button>
