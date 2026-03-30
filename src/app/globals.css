@@ -39,9 +39,6 @@ a { text-decoration: none; }
 .typewriter-placeholder::after {
   content: 'my-beauty-agent';
   animation: typewriter 10s step-end infinite;
-  border-right: 2px solid #D9AF62;
-  padding-right: 3px;
-  animation: typewriter 10s step-end infinite, caret 0.8s step-end infinite;
 }
 
 .hero-h1 {
