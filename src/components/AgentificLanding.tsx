@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 
 // ─── TOKENS ─────────────────────────────────────────────
 const T = {
@@ -320,8 +320,41 @@ const Waitlist = ({ id = 'main', compact = false }: { id?: string; compact?: boo
   );
 };
 
+// ─── SVG ICONS ──────────────────────────────────────────
+const IconGear = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+);
+const IconShield = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <path d="m9 12 2 2 4-4"/>
+  </svg>
+);
+const IconKey = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+  </svg>
+);
+const IconRefresh = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+    <path d="M3 3v5h5"/>
+    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+    <path d="M16 16h5v5"/>
+  </svg>
+);
+const IconChart = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 3v18h18"/>
+    <path d="m19 9-5 5-4-4-3 3"/>
+  </svg>
+);
+
 // ─── PILLAR CARD ─────────────────────────────────────────
-const PillarCard = ({ icon, title, desc, badge }: { icon: string; title: string; desc: string; badge: string }) => (
+const PillarCard = ({ icon, title, desc, badge }: { icon: ReactNode; title: string; desc: string; badge: string }) => (
   <div style={{
     background: T.card,
     border: `1px solid ${T.border}`,
@@ -402,7 +435,7 @@ const ComparisonTable = ({ items }: { items: { without: string; wit: string }[] 
     </div>
 
     {/* Mobile: paired cards */}
-    <div className="compare-mobile" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div className="compare-mobile" style={{ flexDirection: 'column', gap: 12 }}>
       {items.map((c, i) => (
         <div key={i} style={{
           border: `1px solid ${T.border}`,
@@ -421,6 +454,101 @@ const ComparisonTable = ({ items }: { items: { without: string; wit: string }[] 
   </div>
 );
 
+// ─── DEMO SECTION WITH TABS ─────────────────────────────
+const DemoSection = () => {
+  const [tab, setTab] = useState<'cli' | 'dashboard'>('cli');
+
+  return (
+    <section style={{
+      padding: '0 48px 120px',
+      position: 'relative', zIndex: 2,
+      maxWidth: 1200, margin: '0 auto',
+    }} className="section-pad">
+      <div style={{ textAlign: 'center', marginBottom: 48 }}>
+        <div className="label">Try it</div>
+        <h2 className="section-h2" style={{ margin: '0 auto' }}>
+          Name your agent. Watch it deploy.
+        </h2>
+
+        {/* Tabs */}
+        <div style={{
+          display: 'inline-flex', gap: 4, marginTop: 32,
+          background: T.card, border: `1px solid ${T.border}`,
+          borderRadius: 8, padding: 4,
+        }}>
+          {(['cli', 'dashboard'] as const).map(t => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              style={{
+                padding: '10px 24px',
+                background: tab === t ? T.gold : 'transparent',
+                color: tab === t ? T.bg : T.muted,
+                border: 'none',
+                borderRadius: 6,
+                fontFamily: T.font,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              {t === 'cli' ? (
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
+                  </svg>
+                  CLI
+                </span>
+              ) : (
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" />
+                  </svg>
+                  Dashboard
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {tab === 'cli' ? (
+        <DeployDemo />
+      ) : (
+        <div style={{
+          maxWidth: 640, margin: '0 auto',
+          background: T.card,
+          border: `1px solid ${T.border}`,
+          borderRadius: 16,
+          overflow: 'hidden',
+          boxShadow: `0 40px 120px rgba(0,0,0,0.6), 0 0 1px ${T.goldDim}`,
+          aspectRatio: '16/9',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          {/* Replace src with your video file in /public/demo.mp4 */}
+          <video
+            src="/demo.mp4"
+            controls
+            playsInline
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: 16,
+            }}
+            poster=""
+          />
+        </div>
+      )}
+    </section>
+  );
+};
+
 // ─── MAIN ────────────────────────────────────────────────
 export default function AgentificLanding() {
   const [scrollY, setScrollY] = useState(0);
@@ -432,11 +560,11 @@ export default function AgentificLanding() {
   }, []);
 
   const pillars = [
-    { icon: '⚙', title: 'Workflow Engine', desc: 'Deterministic Python workflows. Multi-step processes that actually complete — no LLM deciding what comes next.', badge: 'Python-based, not LLM-orchestrated' },
-    { icon: '🛡', title: 'Tenant Isolation', desc: 'K8s namespace per client. Data never crosses tenant boundaries. Audit-tested.', badge: '9/10 audit score' },
-    { icon: '🔐', title: 'Credential Vault', desc: 'KMS-encrypted OAuth vault. Connect agents to any API with Agentific-branded or custom OAuth.', badge: '9/10 encryption audit' },
-    { icon: '↻', title: 'Managed Runtime', desc: '24/7 execution with auto-restart and multi-model support. Ship and sleep.', badge: 'Zero babysitting required' },
-    { icon: '📊', title: 'Observability', desc: 'Cost per query, per tenant, per model. Latency monitoring and audit trails built in.', badge: 'Real-time dashboards' },
+    { icon: <IconGear />, title: 'Workflow Engine', desc: 'Deterministic Python workflows. Multi-step processes that actually complete — no LLM deciding what comes next.', badge: 'Python-based, not LLM-orchestrated' },
+    { icon: <IconShield />, title: 'Tenant Isolation', desc: 'K8s namespace per client. Data never crosses tenant boundaries. Audit-tested.', badge: '9/10 audit score' },
+    { icon: <IconKey />, title: 'Credential Vault', desc: 'KMS-encrypted OAuth vault. Connect agents to any API with Agentific-branded or custom OAuth.', badge: '9/10 encryption audit' },
+    { icon: <IconRefresh />, title: 'Managed Runtime', desc: '24/7 execution with auto-restart and multi-model support. Ship and sleep.', badge: 'Zero babysitting required' },
+    { icon: <IconChart />, title: 'Observability', desc: 'Cost per query, per tenant, per model. Latency monitoring and audit trails built in.', badge: 'Real-time dashboards' },
   ];
 
   const comparisons = [
@@ -555,19 +683,7 @@ export default function AgentificLanding() {
       </section>
 
       {/* ─── INTERACTIVE DEMO ──────────────────────────── */}
-      <section style={{
-        padding: '0 48px 120px',
-        position: 'relative', zIndex: 2,
-        maxWidth: 1200, margin: '0 auto',
-      }} className="section-pad" >
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div className="label">Try it</div>
-          <h2 className="section-h2" style={{ margin: '0 auto' }}>
-            Name your agent. Watch it deploy.
-          </h2>
-        </div>
-        <DeployDemo />
-      </section>
+      <DemoSection />
 
       {/* ─── BEFORE / AFTER ───────────────────────────── */}
       <section id="platform" className="section-pad" style={{
