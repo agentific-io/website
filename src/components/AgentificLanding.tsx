@@ -160,24 +160,44 @@ const DeployDemo = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ color: T.gold, userSelect: 'none', flexShrink: 0 }}>$</span>
               <span style={{ color: T.muted, flexShrink: 0 }}>agentific deploy --agent</span>
-              <input
-                ref={inputRef}
-                value={agentName}
-                onChange={e => setAgentName(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
-                placeholder="your-agent-name"
-                autoFocus
-                style={{
-                  flex: 1,
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  color: T.white,
-                  fontFamily: T.font,
-                  fontSize: 13,
-                  caretColor: T.gold,
-                }}
-              />
+              <div style={{ position: 'relative', flex: 1 }}>
+                <input
+                  ref={inputRef}
+                  value={agentName}
+                  onChange={e => setAgentName(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
+                  placeholder=""
+                  autoFocus
+                  style={{
+                    width: '100%',
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                    color: T.white,
+                    fontFamily: T.font,
+                    fontSize: 13,
+                    caretColor: T.gold,
+                    position: 'relative',
+                    zIndex: 1,
+                  }}
+                />
+                {!agentName && (
+                  <span className="typing-hint" style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: T.gold,
+                    fontSize: 13,
+                    fontFamily: T.font,
+                    pointerEvents: 'none',
+                    opacity: 0.6,
+                  }} />
+                )}
+              </div>
+            </div>
+            <div style={{ marginTop: 12, fontSize: 11, color: T.dim }}>
+              e.g. <span style={{ color: T.muted }}>sales-copilot</span>, <span style={{ color: T.muted }}>legal-assistant</span>, <span style={{ color: T.muted }}>support-bot</span>
             </div>
             <button
               onClick={runDeploy}
