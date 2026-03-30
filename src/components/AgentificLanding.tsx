@@ -321,35 +321,34 @@ const Waitlist = ({ id = 'main', compact = false }: { id?: string; compact?: boo
 };
 
 // ─── SVG ICONS ──────────────────────────────────────────
-const IconGear = () => (
+const IconOrchestration = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
     <circle cx="12" cy="12" r="3"/>
   </svg>
 );
-const IconShield = () => (
+const IconMemory = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/>
+    <circle cx="12" cy="14" r="2"/>
+    <path d="M12 16v2"/>
+  </svg>
+);
+const IconIntegrations = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
+);
+const IconSecurity = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     <path d="m9 12 2 2 4-4"/>
   </svg>
 );
-const IconKey = () => (
+const IconCloud = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
-  </svg>
-);
-const IconRefresh = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-    <path d="M3 3v5h5"/>
-    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
-    <path d="M16 16h5v5"/>
-  </svg>
-);
-const IconChart = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 3v18h18"/>
-    <path d="m19 9-5 5-4-4-3 3"/>
+    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>
   </svg>
 );
 
@@ -595,6 +594,104 @@ const DemoSection = () => {
   );
 };
 
+// ─── FAQ SECTION ────────────────────────────────────────
+const FaqItem = ({ q, a }: { q: string; a: string }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{
+      borderBottom: `1px solid ${T.border}`,
+    }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: '100%',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '24px 0',
+          background: 'none', border: 'none',
+          color: T.white, fontFamily: T.font,
+          fontSize: 16, fontWeight: 600,
+          cursor: 'pointer',
+          textAlign: 'left',
+          gap: 16,
+        }}
+      >
+        {q}
+        <span style={{
+          flexShrink: 0,
+          color: T.gold,
+          fontSize: 20,
+          transition: 'transform 0.2s',
+          transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
+        }}>+</span>
+      </button>
+      {open && (
+        <p style={{
+          paddingBottom: 24,
+          fontSize: 14,
+          lineHeight: 1.7,
+          color: T.muted,
+          animation: 'fadeIn 0.2s ease',
+        }}>
+          {a}
+        </p>
+      )}
+    </div>
+  );
+};
+
+const FaqSection = () => {
+  const faqs = [
+    {
+      q: 'Can I use my own framework? LangChain, CrewAI, custom Python?',
+      a: 'Yes. Agentific is framework-agnostic. You bring your agent code — we handle everything else. LangChain, CrewAI, Autogen, or plain Python scripts. If it runs, we deploy it.',
+    },
+    {
+      q: 'How is this different from just deploying on AWS or GCP myself?',
+      a: 'You could — and spend weeks setting up tenant isolation, credential management, monitoring, and auto-restart. Agentific gives you all of that out of the box with a single deploy command. You focus on your agent logic, not on DevOps.',
+    },
+    {
+      q: 'What happens with my clients\' data? Is there real isolation?',
+      a: 'Each client gets their own isolated environment. Data never crosses tenant boundaries. We use namespace-level isolation, encrypted storage, and strict access controls. Built for companies that need to pass security audits.',
+    },
+    {
+      q: 'Can my agent connect to external APIs and tools?',
+      a: 'Absolutely. Our integrations layer supports REST APIs, webhooks, databases, CRMs, ERPs — anything with an endpoint. Set it up once, and your agent has access across all client instances.',
+    },
+    {
+      q: 'What models do you support?',
+      a: 'All of them. GPT-4o, Claude, Gemini, Llama, Mistral — or your own fine-tuned model. Switch models per agent or per client without changing your code.',
+    },
+    {
+      q: 'I already have agents in production. Can I migrate?',
+      a: 'Yes. Most teams migrate in under a day. We provide a CLI tool and documentation to help you move your existing agents with zero downtime. Early access users get hands-on migration support from our team.',
+    },
+    {
+      q: 'What does pricing look like?',
+      a: 'We\'re finalizing pricing with our early access cohort. Join the waitlist and we\'ll share details within 48 hours — no commitment, no credit card required.',
+    },
+    {
+      q: 'Is this ready for production or still in beta?',
+      a: 'We\'re onboarding early access users into production right now. The platform is live and handling real workloads. Early access means you get priority support and input on the roadmap.',
+    },
+  ];
+
+  return (
+    <section className="section-pad" style={{
+      borderTop: `1px solid ${T.border}`,
+      position: 'relative', zIndex: 2,
+      maxWidth: 1200, margin: '0 auto',
+    }}>
+      <div className="label">FAQ</div>
+      <h2 className="section-h2">Questions you probably have.</h2>
+      <div style={{ marginTop: 48, maxWidth: 720 }}>
+        {faqs.map((faq, i) => (
+          <FaqItem key={i} q={faq.q} a={faq.a} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
 // ─── MAIN ────────────────────────────────────────────────
 export default function AgentificLanding() {
   const [scrollY, setScrollY] = useState(0);
@@ -606,11 +703,11 @@ export default function AgentificLanding() {
   }, []);
 
   const pillars = [
-    { icon: <IconGear />, title: 'Workflow Engine', desc: 'Deterministic Python workflows. Multi-step processes that actually complete — no LLM deciding what comes next.', badge: 'Python-based, not LLM-orchestrated' },
-    { icon: <IconShield />, title: 'Tenant Isolation', desc: 'K8s namespace per client. Data never crosses tenant boundaries. Audit-tested.', badge: '9/10 audit score' },
-    { icon: <IconKey />, title: 'Credential Vault', desc: 'KMS-encrypted OAuth vault. Connect agents to any API with Agentific-branded or custom OAuth.', badge: '9/10 encryption audit' },
-    { icon: <IconRefresh />, title: 'Managed Runtime', desc: '24/7 execution with auto-restart and multi-model support. Ship and sleep.', badge: 'Zero babysitting required' },
-    { icon: <IconChart />, title: 'Observability', desc: 'Cost per query, per tenant, per model. Latency monitoring and audit trails built in.', badge: 'Real-time dashboards' },
+    { icon: <IconOrchestration />, title: 'Orchestration', desc: 'Your agent follows a clear, repeatable process every time. No guessing, no random failures — just reliable multi-step execution.', badge: 'Deterministic multi-step flows' },
+    { icon: <IconMemory />, title: 'Memory', desc: 'Your agent remembers past conversations and learns from each interaction. Short-term and long-term context that makes every response smarter.', badge: 'Persistent context per session' },
+    { icon: <IconIntegrations />, title: 'Integrations', desc: 'Connect your agent to the tools your business already uses — CRMs, ERPs, APIs, webhooks, databases. One config, instant access.', badge: 'APIs, webhooks & data sources' },
+    { icon: <IconSecurity />, title: 'Security', desc: 'Your clients\' data stays protected. Encrypted at rest and in transit, with anti-prompt-injection and compliance controls built in.', badge: 'Encryption + compliance ready' },
+    { icon: <IconCloud />, title: 'Hosting', desc: 'We handle the infrastructure so you don\'t have to. Cloud or on-premise — deployed where your client needs it, scaled automatically.', badge: 'Cloud or on-premise' },
   ];
 
   const comparisons = [
@@ -818,6 +915,9 @@ export default function AgentificLanding() {
           ))}
         </div>
       </section>
+
+      {/* ─── FAQ ──────────────────────────────────────── */}
+      <FaqSection />
 
       {/* ─── TRUST BAR ────────────────────────────────── */}
       <div className="trust-bar" style={{
