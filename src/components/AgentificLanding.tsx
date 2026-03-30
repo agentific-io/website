@@ -454,6 +454,77 @@ const ComparisonTable = ({ items }: { items: { without: string; wit: string }[] 
   </div>
 );
 
+// ─── DASHBOARD VIDEO ────────────────────────────────────
+const DashboardVideo = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
+  const goFullscreen = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if ((v as unknown as { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+      (v as unknown as { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+    }
+  };
+
+  return (
+    <div style={{
+      maxWidth: 640, margin: '0 auto',
+      background: T.card,
+      border: `1px solid ${T.border}`,
+      borderRadius: 16,
+      overflow: 'hidden',
+      boxShadow: `0 40px 120px rgba(0,0,0,0.6), 0 0 1px ${T.goldDim}`,
+      position: 'relative',
+    }}>
+      <video
+        ref={videoRef}
+        src="/demo.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          width: '100%',
+          display: 'block',
+          borderRadius: 16,
+        }}
+      />
+      <button
+        onClick={goFullscreen}
+        style={{
+          position: 'absolute',
+          bottom: 16,
+          right: 16,
+          width: 36,
+          height: 36,
+          background: 'rgba(0,0,0,0.6)',
+          border: `1px solid ${T.border}`,
+          borderRadius: 8,
+          color: T.white,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backdropFilter: 'blur(8px)',
+          transition: 'background 0.2s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.8)'}
+        onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.6)'}
+        aria-label="Fullscreen"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+        </svg>
+      </button>
+    </div>
+  );
+};
+
 // ─── DEMO SECTION WITH TABS ─────────────────────────────
 const DemoSection = () => {
   const [tab, setTab] = useState<'cli' | 'dashboard'>('cli');
@@ -518,32 +589,7 @@ const DemoSection = () => {
       {tab === 'cli' ? (
         <DeployDemo />
       ) : (
-        <div style={{
-          maxWidth: 640, margin: '0 auto',
-          background: T.card,
-          border: `1px solid ${T.border}`,
-          borderRadius: 16,
-          overflow: 'hidden',
-          boxShadow: `0 40px 120px rgba(0,0,0,0.6), 0 0 1px ${T.goldDim}`,
-          aspectRatio: '16/9',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          {/* Replace src with your video file in /public/demo.mp4 */}
-          <video
-            src="/demo.mp4"
-            controls
-            playsInline
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: 16,
-            }}
-            poster=""
-          />
-        </div>
+        <DashboardVideo />
       )}
     </section>
   );
