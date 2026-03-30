@@ -160,57 +160,59 @@ const DeployDemo = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative' }}>
               <span style={{ color: T.gold, userSelect: 'none', flexShrink: 0 }}>$</span>
               <span style={{ color: T.muted, flexShrink: 0 }}>agentific deploy --agent</span>
-              <input
-                ref={inputRef}
-                value={agentName}
-                onChange={e => setAgentName(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
-                placeholder=""
-                autoFocus
-                style={{
-                  flex: 1,
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  color: T.white,
-                  fontFamily: T.font,
-                  fontSize: 13,
-                  caretColor: T.gold,
-                }}
-              />
+              <div style={{ position: 'relative', flex: 1 }}>
+                <input
+                  ref={inputRef}
+                  value={agentName}
+                  onChange={e => setAgentName(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
+                  placeholder=""
+                  autoFocus
+                  style={{
+                    width: '100%',
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                    color: T.white,
+                    fontFamily: T.font,
+                    fontSize: 13,
+                    caretColor: T.gold,
+                  }}
+                />
 
-              {/* Floating tooltip bubble */}
-              {!agentName && (
-                <div className="float-bubble" style={{
-                  position: 'absolute',
-                  top: -52,
-                  left: 0,
-                  background: T.gold,
-                  color: T.bg,
-                  padding: '8px 16px',
-                  borderRadius: 10,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  fontFamily: T.font,
-                  whiteSpace: 'nowrap',
-                  pointerEvents: 'none',
-                  boxShadow: `0 8px 32px rgba(217,175,98,0.3)`,
-                  zIndex: 10,
-                }}>
-                  Type here! e.g. &quot;my-beauty-agent&quot;
-                  {/* Arrow */}
-                  <div style={{
+                {/* Floating tooltip bubble */}
+                {!agentName && (
+                  <div className="float-bubble" style={{
                     position: 'absolute',
-                    bottom: -6,
-                    left: 24,
-                    width: 12,
-                    height: 12,
+                    top: -48,
+                    left: 0,
                     background: T.gold,
-                    transform: 'rotate(45deg)',
-                    borderRadius: 2,
-                  }} />
-                </div>
-              )}
+                    color: T.bg,
+                    padding: '8px 16px',
+                    borderRadius: 10,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    fontFamily: T.font,
+                    whiteSpace: 'nowrap',
+                    pointerEvents: 'none',
+                    boxShadow: `0 8px 32px rgba(217,175,98,0.3)`,
+                    zIndex: 10,
+                  }}>
+                    Type here! e.g. &quot;my-beauty-agent&quot;
+                    {/* Arrow */}
+                    <div style={{
+                      position: 'absolute',
+                      bottom: -6,
+                      left: 24,
+                      width: 12,
+                      height: 12,
+                      background: T.gold,
+                      transform: 'rotate(45deg)',
+                      borderRadius: 2,
+                    }} />
+                  </div>
+                )}
+              </div>
             </div>
             <button
               onClick={runDeploy}
