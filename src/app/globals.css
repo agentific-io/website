@@ -14,28 +14,13 @@ a { text-decoration: none; }
   100% { background-position: 200% center; }
 }
 
-@keyframes typingHint {
-  0%, 100% { content: 'type your agent name here...'; opacity: 0.5; }
-  25% { content: 'sales-copilot'; opacity: 0.7; }
-  50% { content: 'legal-assistant'; opacity: 0.7; }
-  75% { content: 'support-bot'; opacity: 0.7; }
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.typing-hint::after {
-  content: 'type here...';
-  animation: typingHint 6s ease-in-out infinite;
-}
-
-.typing-hint::before {
-  content: '|';
-  animation: blink 1s step-end infinite;
-  margin-right: 2px;
-  color: #D9AF62;
+.float-bubble {
+  animation: floatBubble 2s ease-in-out infinite;
 }
 
 .hero-h1 {

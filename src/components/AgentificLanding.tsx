@@ -157,47 +157,60 @@ const DeployDemo = () => {
             <div style={{ color: T.muted, marginBottom: 16, fontSize: 12 }}>
               # Try it — name your agent and hit deploy
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, position: 'relative' }}>
               <span style={{ color: T.gold, userSelect: 'none', flexShrink: 0 }}>$</span>
               <span style={{ color: T.muted, flexShrink: 0 }}>agentific deploy --agent</span>
-              <div style={{ position: 'relative', flex: 1 }}>
-                <input
-                  ref={inputRef}
-                  value={agentName}
-                  onChange={e => setAgentName(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
-                  placeholder=""
-                  autoFocus
-                  style={{
-                    width: '100%',
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                    color: T.white,
-                    fontFamily: T.font,
-                    fontSize: 13,
-                    caretColor: T.gold,
-                    position: 'relative',
-                    zIndex: 1,
-                  }}
-                />
-                {!agentName && (
-                  <span className="typing-hint" style={{
+              <input
+                ref={inputRef}
+                value={agentName}
+                onChange={e => setAgentName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && agentName.trim() && runDeploy()}
+                placeholder=""
+                autoFocus
+                style={{
+                  flex: 1,
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                  color: T.white,
+                  fontFamily: T.font,
+                  fontSize: 13,
+                  caretColor: T.gold,
+                }}
+              />
+
+              {/* Floating tooltip bubble */}
+              {!agentName && (
+                <div className="float-bubble" style={{
+                  position: 'absolute',
+                  top: -52,
+                  right: 0,
+                  background: T.gold,
+                  color: T.bg,
+                  padding: '8px 16px',
+                  borderRadius: 10,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  fontFamily: T.font,
+                  whiteSpace: 'nowrap',
+                  pointerEvents: 'none',
+                  boxShadow: `0 8px 32px rgba(217,175,98,0.3)`,
+                  zIndex: 10,
+                }}>
+                  Type here! e.g. &quot;my-beauty-agent&quot;
+                  {/* Arrow */}
+                  <div style={{
                     position: 'absolute',
-                    left: 0,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: T.gold,
-                    fontSize: 13,
-                    fontFamily: T.font,
-                    pointerEvents: 'none',
-                    opacity: 0.6,
+                    bottom: -6,
+                    right: 24,
+                    width: 12,
+                    height: 12,
+                    background: T.gold,
+                    transform: 'rotate(45deg)',
+                    borderRadius: 2,
                   }} />
-                )}
-              </div>
-            </div>
-            <div style={{ marginTop: 12, fontSize: 11, color: T.dim }}>
-              e.g. <span style={{ color: T.muted }}>sales-copilot</span>, <span style={{ color: T.muted }}>legal-assistant</span>, <span style={{ color: T.muted }}>support-bot</span>
+                </div>
+              )}
             </div>
             <button
               onClick={runDeploy}
