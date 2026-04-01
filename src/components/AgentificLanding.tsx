@@ -899,20 +899,8 @@ export default function AgentificLanding() {
       {/* ─── INTERACTIVE DEMO ──────────────────────────── */}
       <DemoSection />
 
-      {/* ─── BEFORE / AFTER ───────────────────────────── */}
-      <section id="platform" className="section-pad" style={{
-        borderTop: `1px solid ${T.border}`,
-        position: 'relative', zIndex: 2,
-        maxWidth: 1200, margin: '0 auto',
-      }}>
-        <div className="label">Why Agentific</div>
-        <h2 className="section-h2">Stop building infra.<br />Start shipping agents.</h2>
-
-        <ComparisonTable items={comparisons} />
-      </section>
-
       {/* ─── PLATFORM PILLARS ──────────────────────────── */}
-      <section className="section-pad" style={{
+      <section id="platform" className="section-pad" style={{
         borderTop: `1px solid ${T.border}`,
         position: 'relative', zIndex: 2,
         maxWidth: 1200, margin: '0 auto',
@@ -939,6 +927,18 @@ export default function AgentificLanding() {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* ─── BEFORE / AFTER ───────────────────────────── */}
+      <section className="section-pad" style={{
+        borderTop: `1px solid ${T.border}`,
+        position: 'relative', zIndex: 2,
+        maxWidth: 1200, margin: '0 auto',
+      }}>
+        <div className="label">Why Agentific</div>
+        <h2 className="section-h2">Stop building infra.<br />Start shipping agents.</h2>
+
+        <ComparisonTable items={comparisons} />
       </section>
 
       {/* ─── USE CASES ─────────────────────────────────── */}
