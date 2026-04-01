@@ -399,11 +399,10 @@ const IconOrchestration = () => (
     <circle cx="12" cy="12" r="3"/>
   </svg>
 );
-const IconMemory = () => (
+const IconObservability = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/>
-    <circle cx="12" cy="14" r="2"/>
-    <path d="M12 16v2"/>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+    <circle cx="12" cy="12" r="3"/>
   </svg>
 );
 const IconIntegrations = () => (
@@ -775,11 +774,11 @@ export default function AgentificLanding() {
   }, []);
 
   const pillars = [
-    { icon: <IconOrchestration />, title: 'Orchestration', desc: 'Your agent follows a clear, repeatable process every time. No guessing, no random failures — just reliable multi-step execution.', badge: 'Deterministic multi-step flows' },
-    { icon: <IconMemory />, title: 'Memory', desc: 'Your agent remembers past conversations and learns from each interaction. Short-term and long-term context that makes every response smarter.', badge: 'Persistent context per session' },
-    { icon: <IconIntegrations />, title: 'Integrations', desc: 'Connect your agent to the tools your business already uses — CRMs, ERPs, APIs, webhooks, databases. One config, instant access.', badge: 'APIs, webhooks & data sources' },
-    { icon: <IconSecurity />, title: 'Security', desc: 'Your clients\' data stays protected. Encrypted at rest and in transit, with anti-prompt-injection and compliance controls built in.', badge: 'Encryption + compliance ready' },
-    { icon: <IconCloud />, title: 'Hosting', desc: 'We handle the infrastructure so you don\'t have to. Cloud or on-premise — deployed where your client needs it, scaled automatically.', badge: 'Cloud or on-premise' },
+    { icon: <IconOrchestration />, title: 'Orchestration', desc: 'Reliable multi-step workflows powered by a deterministic engine. Your agent executes complex processes step by step — no LLM guessing what comes next.', badge: 'Deterministic engine' },
+    { icon: <IconCloud />, title: '24/7 Managed Runtime', desc: 'Your agents run continuously without you babysitting infrastructure. Auto-restart and auto-scaling included.', badge: 'Always-on infrastructure' },
+    { icon: <IconIntegrations />, title: 'Credentials Vault & Integrations', desc: 'Plug your own API keys or use Agentific\'s pre-verified connections. OAuth management, encrypted storage, ready to connect to any service out of the box.', badge: 'Encrypted credentials' },
+    { icon: <IconSecurity />, title: 'Secure Hosting', desc: 'Kubernetes namespace isolation per tenant. KMS-encrypted secrets. Anti-prompt-injection protections. Your clients\' data never touches another tenant\'s environment.', badge: 'Tenant isolation' },
+    { icon: <IconObservability />, title: 'Observability', desc: 'Per-agent cost tracking, execution logs, latency monitoring, and power-user protection with configurable limits and rules. Know exactly what every agent is doing and how much it costs.', badge: 'Full visibility' },
   ];
 
   const comparisons = [
